@@ -8,6 +8,7 @@ from xml.dom.minidom import parseString
 from collections import defaultdict
 from functools import cmp_to_key
 
+import arrow
 from six.moves.BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from six.moves.socketserver import ThreadingMixIn
 from six.moves.urllib.parse import urlparse, urljoin, unquote_plus, parse_qsl, quote_plus
@@ -353,8 +354,13 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         ## Fix mpd overalseconds bug
         if mpd.getAttribute('type') == 'dynamic' and 'timeShiftBufferDepth' not in mpd_attribs and 'mediaPresentationDuration' not in mpd_attribs:
-            mpd.setAttribute('mediaPresentationDuration', 'PT60S')
-            log.debug('Dash Fix: 60S mediaPresentationDuration added')
+            if 'availabilityStartTime' in mpd_attribs:
+                buffer_seconds = (arrow.now() - arrow.get(mpd.getAttribute('availabilityStartTime'))).total_seconds()
+                mpd.setAttribute('timeShiftBufferDepth', 'PT{}S'.format(buffer_seconds))
+                log.debug('Dash Fix: {}S timeShiftBufferDepth added'.format(buffer_seconds))
+            else:
+                mpd.setAttribute('mediaPresentationDuration', 'PT60S')
+                log.debug('Dash Fix: 60S mediaPresentationDuration added')
 
         ## SORT ADAPTION SETS BY BITRATE ##
         video_sets = []
@@ -590,6 +596,22 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         response.stream.content = mpd
 
+    def _parse_m3u8_sub(self, m3u8, master_url):
+        lines = []
+
+        for line in m3u8.splitlines():
+            if not line.startswith('#') and '/beacon?' in line.lower():
+                parse = urlparse(line)
+                params = dict(parse_qsl(parse.query))
+                for key in params:
+                    if key.lower() == 'redirect_path':
+                        line = params[key]
+                        log.debug('M3U8 Fix: Beacon removed')
+
+            lines.append(line)
+
+        return '\n'.join(lines)
+
     def _parse_m3u8_master(self, m3u8, master_url):
         def _process_media(line):
             attribs = {}
@@ -750,6 +772,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         if is_master:
             m3u8 = self._manifest_middleware(m3u8)
             m3u8 = self._parse_m3u8_master(m3u8, response.url)
+        else:
+            m3u8 = self._parse_m3u8_sub(m3u8, response.url)
 
         base_url = urljoin(response.url, '/')
 
