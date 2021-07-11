@@ -55,7 +55,8 @@ msgstr "Extras"
 msgctxt "#30014"
 msgid "Full support on Kodi {kodi_ver} requires at least Inputstream Adaptive Version {ver_required}\n"
 "You may experience playback issues with your current version."
-msgstr ""
+msgstr "Vollständige Unterstützung von Kodi {kode_ver} benötigt mindestens Inputstream Adaptive Version {ver_required}\n"
+"Sie können Wiedergabeprobleme mit der aktuellen Version feststellen."
 
 msgctxt "#30015"
 msgid "Dolby Vision"
@@ -63,7 +64,7 @@ msgstr "Dolby Vision"
 
 msgctxt "#30016"
 msgid "Sync with Disney+"
-msgstr ""
+msgstr "Mit Disney+ synchronisieren"
 
 msgctxt "#30018"
 msgid "HDR10"
@@ -75,89 +76,91 @@ msgstr "H.265"
 
 msgctxt "#30020"
 msgid "Skip Credits"
-msgstr ""
+msgstr "Überspringe Abspann"
 
 msgctxt "#30021"
 msgid "Play Next Episode"
-msgstr ""
+msgstr "Spiele nächste Episode"
 
 msgctxt "#30022"
 msgid "Play Next Recommended Movie"
-msgstr ""
+msgstr "Spiele nächsten vorgeschlagenen Film"
 
 msgctxt "#30023"
 msgid "Play without Intro"
-msgstr ""
+msgstr "Spiele ohne Intro"
 
 msgctxt "#30024"
 msgid "Skip Intros"
-msgstr ""
+msgstr "Überspringe Intros"
 
 msgctxt "#30025"
 msgid "Play from Start"
-msgstr ""
+msgstr "Von Anfang an spielen"
 
 msgctxt "#30026"
 msgid "Watchlist"
-msgstr ""
+msgstr "Watchlist"
 
 msgctxt "#30027"
 msgid "Add to Watchlist"
-msgstr ""
+msgstr "Zu Watchlist hinzufügen"
 
 msgctxt "#30028"
 msgid "Remove from Watchlist"
-msgstr ""
+msgstr "Von Watchlist entfernen"
 
 msgctxt "#30029"
 msgid "Added to Watchlist"
-msgstr ""
+msgstr "Zu Watchlist hinzugefügt"
 
 msgctxt "#30041"
 msgid "Play with Intro"
-msgstr ""
+msgstr "Spiele mit Intro"
 
 msgctxt "#30042"
 msgid "Continue Watching"
-msgstr ""
+msgstr "Wiedergabe fortsetzen"
 
 msgctxt "#30043"
 msgid "You are not entitled to access this content.\n"
 "Check your subscription is valid."
-msgstr ""
+msgstr "Sie sind nicht berechtigt diesen Inhalt anzusehen.\n"
+"Überprüfen Sie die Gültigkeit Ihres Abonnements."
 
 msgctxt "#30044"
 msgid "Your login details are in-correct.\n"
 "Please check them and try again."
-msgstr ""
+msgstr "Ihre Zugangdaten sind falsch.\n"
+"Bitte überprüfen Sie diese und versuchen Sie es erneut."
 
 msgctxt "#30048"
 msgid "From {time:0>8}"
-msgstr ""
+msgstr "Von {time:0>8}"
 
 msgctxt "#30049"
 msgid "{label} [B](Available {date})[/B]"
-msgstr ""
+msgstr "{label} [B](Verfügbar {date})[/B]"
 
 msgctxt "#30050"
 msgid "D/MM/YYYY"
-msgstr ""
+msgstr "D/MM/YYYY"
 
 msgctxt "#30051"
 msgid "Could not find stream data for this content"
-msgstr ""
+msgstr "Streaminhalt für diesen Inhalt nicht gefunden"
 
 msgctxt "#30052"
 msgid "Dolby Atmos"
-msgstr ""
+msgstr "Dolby Atmos"
 
 msgctxt "#30053"
 msgid "Profile Settings"
-msgstr ""
+msgstr "Profileinstellungen"
 
 msgctxt "#30054"
 msgid "Continue Watching"
-msgstr ""
+msgstr "Wiedergabe fortsetzen"
 
 ## COMMON SETTINGS ##
 
