@@ -20,6 +20,10 @@ from .models import Source, Playlist, EPG, Channel, merge_info
 from .language import _
 from . import iptv_manager
 
+TROLL_URL = 'https://'
+TROLL_NAME = 'Use https://github.com/iptv-org/iptv'
+TROLLS = ['free-iptv', 'Food4Monkeys', u'Free\u0097IPTV', 'Raspifan2020']
+
 def copy_partial_data(file_path, _out, start_index, end_index):
     if start_index < 1 or end_index < start_index:
         return
@@ -220,7 +224,12 @@ class Merger(object):
         if playlist.use_start_chno:
             chnos = {'tv': playlist.start_chno, 'radio': playlist.start_chno}
 
-        free_iptv = False
+        is_troll = False
+        for troll in TROLLS:
+            if troll.lower() in playlist.path.lower():
+                is_troll = True
+                break
+
         valid_file = False
         default_attribs = {}
 
@@ -231,8 +240,11 @@ class Merger(object):
                 if not line:
                     continue
 
-                if 'free-iptv' in line.lower():
-                    free_iptv = True
+                if not is_troll:
+                    for troll in TROLLS:
+                        if troll.lower() in line.lower():
+                            is_troll = True
+                            break
 
                 if not valid_file and '#EXTM3U' not in line:
                     raise Error('Invalid playlist - Does not start with #EXTM3U')
@@ -312,8 +324,9 @@ class Merger(object):
 
                             chnos['tv'] = channel.chno + 1
 
-                    if free_iptv:
+                    if is_troll:
                         channel.url = TROLL_URL
+                        channel.name = TROLL_NAME
 
                     channel.groups = [x for x in channel.groups if x.strip()]
                     channel.visible = playlist.default_visible
